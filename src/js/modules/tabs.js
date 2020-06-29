@@ -20,6 +20,19 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
     hideContent();
     showContent();
 
+    header.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target && (target.classList.contains(tabSelector.replace(/\./, '')) || 
+        target.parentNode.classList.contains(tabSelector.replace(/\./, '')))) {
+            tabs.forEach((item, i) => {
+                if (target === item || target.parentNode === item) {
+                    hideContent();
+                    showContent(i);
+                }
+            }); 
+        }
+    });
+
 };
 
 export default tabs;
