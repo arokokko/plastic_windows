@@ -5,7 +5,7 @@ const forms = () => {
 
     phoneInput.forEach(item => {
         item.addEventListener('input', () => {
-            item.value = item.value.replace(/\D/, '');
+            item.value = item.value.replace(/[^\+\d]/, '');
         });
         
     });
