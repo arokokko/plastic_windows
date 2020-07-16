@@ -29,13 +29,18 @@ const forms = (state) => {
     const clearInput = () => {
         input.forEach(item => {
             item.value = '';
+            if (item.getAttribute('type') == 'checkbox') {
+                item.checked = false;
+            }
         });
     };
+    
 
     form.forEach(item => {
        item.addEventListener('submit', (e) => {
            e.preventDefault();
-
+           let warning = document.querySelectorAll('.status1'),  
+               warning1 = document.querySelectorAll('.status2');
            let messageStatus = document.createElement('div');
            messageStatus.classList.add('status');
            item.appendChild(messageStatus);
@@ -57,6 +62,19 @@ const forms = (state) => {
                 clearInput();
                 setTimeout(() => {
                     messageStatus.remove();
+                    if (warning){
+                        warning.forEach(item => {
+                            item.remove();
+                        });
+                    }
+                    if (warning1){
+                        warning1.forEach(item => {
+                            item.remove();
+                        });
+                    }
+                    for (let key in state) {
+                        delete state[key];
+                    }
                 }, 5000);
             });
 

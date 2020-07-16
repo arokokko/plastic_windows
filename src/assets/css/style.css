@@ -13,9 +13,13 @@ body {
   color: #000000;
 }
 
-.status {
+.status, .status1, .status2 {
   display: block;
   color: red;
+}
+
+.status1, .status2 {
+  margin-top: 5px;
 }
 
 a:hover {
