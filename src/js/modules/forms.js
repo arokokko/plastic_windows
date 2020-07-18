@@ -1,7 +1,10 @@
 const forms = (state) => {
     const form = document.querySelectorAll('form'),
         input = document.querySelectorAll('input'),
-        phoneInput = document.querySelectorAll('input[name="user_phone"]');
+        phoneInput = document.querySelectorAll('input[name="user_phone"]'),
+        select = document.querySelector('#view_type'),
+        tabs = document.querySelectorAll('.balcon_icons_img'),
+        content = document.querySelectorAll('.big_img > img');
 
     phoneInput.forEach(item => {
         item.addEventListener('input', () => {
@@ -33,6 +36,19 @@ const forms = (state) => {
                 item.checked = false;
             }
         });
+        select.value = 'default';
+    };
+
+    const hideAndShowTabs = () => {
+        content.forEach(item => {
+            item.style.display = 'none';
+        });
+        tabs.forEach(item => {
+            item.classList.remove('do_image_more');
+        });
+    
+        content[0].style.display = 'inline-block';
+        tabs[0].classList.add('do_image_more');
     };
     
 
@@ -60,6 +76,7 @@ const forms = (state) => {
             .catch(() => document.querySelector('.status').textContent = message.failure)
             .finally(() => {
                 clearInput();
+                hideAndShowTabs();
                 setTimeout(() => {
                     messageStatus.remove();
                     if (warning){
