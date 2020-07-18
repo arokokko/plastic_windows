@@ -31,14 +31,18 @@ const forms = (state) => {
 
     const clearInput = () => {
         input.forEach(item => {
+            //очистка инпутов куда вводятся данные
             item.value = '';
+            // очистка чекбоксов
             if (item.getAttribute('type') == 'checkbox') {
                 item.checked = false;
             }
         });
+        // установка селекта в первоначальное значение
         select.value = 'default';
     };
 
+    //функция установки табов в модальном окне в первоначальное значение
     const hideAndShowTabs = () => {
         content.forEach(item => {
             item.style.display = 'none';
@@ -49,6 +53,15 @@ const forms = (state) => {
     
         content[0].style.display = 'inline-block';
         tabs[0].classList.add('do_image_more');
+    };
+
+    //фукция удаления свежесозданных дивов в модальных окнах
+    const removeAddedDivs = (warn) => {
+        if (warn){
+            warn.forEach(item => {
+                item.remove();
+            });
+        }
     };
     
 
@@ -72,26 +85,22 @@ const forms = (state) => {
             .then(res => {
                 console.log(res);
                 document.querySelector('.status').textContent = message.success;
+                //при успешной отправке очищаем инпуты
+                clearInput();
+                //устанавливаем табы в первоначальное значение
+                hideAndShowTabs();
+                // удаляем все свойства из объекта modalState
+                for (let key in state) {
+                    delete state[key];
+                }
             })
             .catch(() => document.querySelector('.status').textContent = message.failure)
             .finally(() => {
-                clearInput();
-                hideAndShowTabs();
+                //при любом раскладе удаляем warning warning1 messageStatus 
+                removeAddedDivs(warning);
+                removeAddedDivs(warning1);
                 setTimeout(() => {
                     messageStatus.remove();
-                    if (warning){
-                        warning.forEach(item => {
-                            item.remove();
-                        });
-                    }
-                    if (warning1){
-                        warning1.forEach(item => {
-                            item.remove();
-                        });
-                    }
-                    for (let key in state) {
-                        delete state[key];
-                    }
                 }, 5000);
             });
 

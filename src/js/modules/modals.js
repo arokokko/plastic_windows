@@ -24,12 +24,14 @@ const modals = (state) => {
                     document.body.style.overflow = 'hidden';
                 };
 
+                // проверка на заполненность полей ввода
+                // проверка через наличие или отсутствие соответствующих свойств у объекта modalState
                 if (modalSelector == '.popup_calc_profile' && ( !state.width || !state.height)) {
-
+                // если поля поля ширины и высоты в первом модальном незаполнены, то добавляется warning с требованием 
                     item.parentNode.appendChild(warning);
                     document.querySelector('.status1').textContent = 'Укажите форму и размеры окна';
                 } else if (modalSelector == '.popup_calc_end' && (!state.type || !state.profile)) {
-                   
+                // если не выбран тип и профиль, то добавляется warning1   
                     item.parentNode.appendChild(warning1);
                     document.querySelector('.status2').textContent = 'Укажите тип и профиль остекления';
                 } else {
