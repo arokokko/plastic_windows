@@ -27,6 +27,7 @@ const modals = (state) => {
 				    });
                     modal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
+                    document.body.style.marginRight = `${scroll}px`;
                 };
 
                 // проверка на заполненность полей ввода
@@ -72,9 +73,22 @@ const modals = (state) => {
 
     function callModalByTime(selector, time) {
         setTimeout(() => {
-            document.querySelector(selector).style.display = 'block';
-            document.body.style.overflow = 'hidden'; 
-            document.body.style.marginRight = `${scroll}px`;
+
+            let display;
+            
+            document.querySelectorAll('[data-modal]').forEach(item => {
+                if (getComputedStyle(item).display !== 'none') {
+                    display = true;
+                }
+            });
+
+            if (!display) {
+                document.querySelector(selector).style.display = 'block';
+                document.body.style.overflow = 'hidden'; 
+                document.body.style.marginRight = `${scroll}px`;
+            }
+
+            
         }, time);
     }
 
