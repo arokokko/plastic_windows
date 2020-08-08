@@ -13,7 +13,7 @@ body {
   color: #000000;
 }
 
-.status {
+.status, .status1, .status2 {
   display: block;
   color: red;
 }
@@ -30,6 +30,9 @@ body {
   to {
     opacity: 1;
   }
+}
+.status1, .status2 {
+  margin-top: 5px;
 }
 
 a:hover {
@@ -76,7 +79,7 @@ textarea:focus {
   margin-bottom: 2rem;
   text-align: center;
   border-radius: 1rem;
-  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .form_input::-webkit-input-placeholder {

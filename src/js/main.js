@@ -4,13 +4,19 @@ import tabs from './modules/tabs';
 import forms from './modules/forms';
 import timer from './modules/timer';
 import images from './modules/images';
+import changeModalState from './modules/changeModalState';
 
 window.addEventListener('DOMContentLoaded', function() {
     'use strict';
-    modals();
+
+    let modalState = {};
+
+    changeModalState(modalState);
+    modals(modalState);
     tabs('.glazing_slider', '.glazing_block', '.glazing_content', 'active');
     tabs('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click');
-    forms();
     timer('#timer', '2020-07-15');
     images();
+    tabs('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
+    forms(modalState);
 });
